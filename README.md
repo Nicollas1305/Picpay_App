@@ -1,4 +1,4 @@
-# picpay
+# Picpay
 
 A new Flutter project.
 
