@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:picpay/widgets/button_tab.widget.dart';
+import 'package:picpay/widgets/history.widget.dart';
 
 class PicPayPage extends StatelessWidget {
   @override
@@ -9,6 +11,10 @@ class PicPayPage extends StatelessWidget {
           child: Column(
             children: [
               buildAppBar(context),
+              SizedBox(
+                height: 10,
+              ),
+              buildHistory(),
             ],
           ),
         ),
@@ -97,5 +103,43 @@ Widget buildAppBar(BuildContext context) {
         ),
       ],
     ),
+  );
+}
+
+Widget buildHistory() {
+  return Column(
+    children: [
+      Row(
+        children: [
+          ButtonTab(
+            isSelected: true,
+            text: 'Sugestões',
+          ),
+          ButtonTab(
+            isSelected: false,
+            text: 'Favoritos',
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Container(
+        height: 110,
+        margin: const EdgeInsets.only(left: 5),
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (notification) {
+            notification.disallowGlow();
+            return true;
+          },
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (_, index) {
+                return History();
+              }),
+        ),
+      )
+    ],
   );
 }
